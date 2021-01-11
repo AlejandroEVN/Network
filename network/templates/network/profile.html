@@ -1,0 +1,42 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% load network_tags %}
+
+{% block body %}
+    {% if message %}
+        <div class="alert alert-danger">
+            {{message}}
+            <a href="{% url 'index' %}">Go back to the homepage</a>
+        </div>
+    {% else %}
+        <div class="container p-5 border shadow rounded">
+            <span class="display-4">{{profile.user}}</span>
+            <div class="float-right">
+                <h6 class="mt-4 text-muted">Since: {{profile.user.date_joined}}</h6>
+                {% is_followed user profile as following %}
+                {% if user.is_authenticated and profile.user.id is not user.id %}
+                <div class="float-right mt-2">
+                    {% if following %}
+                        <button id="btn-follow" data-follow="{{profile.user.id}}" class="btn btn-sm btn-outline-info">Unfollow</button>
+                    {% else %}
+                        <button id="btn-follow" data-follow="{{profile.user.id}}" class="btn btn-sm btn-outline-info">Follow</button>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            <p class="m-0">Followers: <span id="followers">{{profile.followers.count}}</span></p>
+            <p>Following: {{profile.following.count}}</p>
+            
+        </div>
+        
+        <hr>
+
+        {% include "network/posts_template.html" %}
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    {% if user.is_authenticated and profile.user.id is not user.id %}
+        <script src="{% static 'network/JavaScript/follow.js' %}"></script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="container p-5 display-4">All posts</div>
+    {% if user.is_authenticated %}
+        <div class="container p-5 shadow border">
+            <form action="{% url 'new_post' %}" method="POST">
+                {% csrf_token %}
+                {% for input in post_form %}
+                    {{input}}
+                {% endfor %}
+                <input type="submit" class="btn btn-sm btn-outline-success">
+            </form>
+        </div>
+    {% endif %}
+    <hr>
+    {% include "network/posts_template.html" %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}

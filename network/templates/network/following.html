@@ -1,0 +1,17 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="container px-5 display-4">People you follow</div>
+
+    {% if profile.following.count is 0 %}
+        <div class="px-5 alert alert-info">
+            Your following list is empty !
+        </div>
+    {% else %}    
+        <p class="text-muted px-5 mb-2">What are they saying...</p>
+        {% include "network/posts_template.html" %}
+    {% endif %}
+    
+{% endblock %}

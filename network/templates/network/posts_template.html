@@ -1,0 +1,77 @@
+{% load static %}
+{% load network_tags %}
+
+<div class="container shadow rounded p-2 mb-2" id="posts-section">
+    {% for post in posts %}
+        <div class="container border shadow rounded p-2 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">
+                            <a href="{% url 'profile' post.user.id %}">{{post.user}}</a>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted float-right">On: {{post.timestamp}}</h6>
+                    </div>
+                    {% if user.is_authenticated and user.id is post.user.id %}
+                        <button class="edit btn btn-sm btn-outline-warning" data-post_id="{{post.id}}">Edit</button>
+                    {% endif %}                  
+                    <hr>
+                  <p id="post-{{post.id}}" class="card-text"><span id="hide-{{post.id}}">{{post.content}}</span></p>
+                </div>
+            </div>
+            
+            <div class="container p-1">
+                {% if user.id is not post.user.id %}
+                    {% is_liked user.id post.id as liked_by_user %}
+                    {% if liked_by_user %}
+                        <button data-post_id="{{post.id}}" data-liked="true" class="like btn btn-sm text-danger material-icons">favorite</button>
+                        <span id="likes-{{post.id}}" class="mr-5">{{post.likes.count}}</span>
+                    {% else %}
+                        <button data-post_id="{{post.id}}" data-liked="false" class="like btn btn-sm text-danger material-icons">favorite_border</button>
+                        <span id="likes-{{post.id}}" class="mr-5">{{post.likes.count}}</span>
+                    {% endif %}
+                {% else %}
+                    <button data-post_id="{{post.id}}" class="btn btn-sm text-info material-icons own-like" disabled>favorite</button>
+                    <span id="likes-{{post.id}}" class="mr-5">{{post.likes.count}}</span>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% if posts.has_other_pages %}
+    <ul class="pagination pagination-sm justify-content-center">
+        {% if posts.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+            </li>
+        {% endif %}
+
+        {% for i in posts.paginator.page_range %}
+            {% if posts.number == i %}
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{i}}<span class="sr-only">(current)</span>
+                    </span>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}    
+
+        {% if posts.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Next</span>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
