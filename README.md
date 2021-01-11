@@ -43,7 +43,7 @@ Toggles 'Follow' status by the user that makes the request.
 #### Installation
 
 - Clone into your machine
-- Open cmd
+- Open a terminal
 - Cd into projects' folder
 - Run `pip install requirements.txt` (ideally in a virtual environment)
 - Run `py manage.py runserver`
