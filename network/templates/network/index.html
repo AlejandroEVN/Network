@@ -4,13 +4,17 @@
 {% block body %}
     <div class="container p-5 display-4">All posts</div>
     {% if user.is_authenticated %}
-        <div class="container p-5 shadow border">
+        <div draggable="true" class="bg-light p-2 shadow border border-info rounded position-fixed new-post">
+            <div class="text-muted float-left">New post</div>
+            <button class="btn btn-sm btn-info btn-new-post p-0 mb-2 float-right">
+                <span class="text-light material-icons">create</span>
+            </button>
             <form action="{% url 'new_post' %}" method="POST">
                 {% csrf_token %}
                 {% for input in post_form %}
                     {{input}}
                 {% endfor %}
-                <input type="submit" class="btn btn-sm btn-outline-success">
+                <input type="submit" value="Post" class="btn btn-sm btn-outline-success">
             </form>
         </div>
     {% endif %}
@@ -19,4 +23,5 @@
 {% endblock %}
 
 {% block script %}
+<script src="{% static 'network/JavaScript/newPost.js' %}"></script>
 {% endblock %}

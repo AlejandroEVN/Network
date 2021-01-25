@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Populates the editing span element
             edit_content.innerHTML = `
-                <textarea id="content-${post_id}" name="content" rows=5>${post_content.innerHTML}</textarea>
+                <textarea id="content-${post_id}" name="content">${post_content.innerHTML}</textarea>
                 <div>
                     <button id="save-${post_id}" class="btn btn-sm btn-outline-success">Save</button>
                     <button id="cancel-${post_id}" class="btn btn-sm btn-outline-danger">Cancel</button>
