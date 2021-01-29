@@ -8,6 +8,10 @@ Add, edit and like posts. Add/remove other users to your following list.
 
 Likes and following list are updated through AJAX calls.
 
+#### Demo
+<img src="./network/demo/network-demo1.gif" width="960" height="540" />
+<img src="./network/demo/network-demo2.gif" width="960" height="540" />
+<img src="./network/demo/network-demo3.gif" width="960" height="540" />
 
 #### Routes
 
