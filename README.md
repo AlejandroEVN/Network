@@ -1,5 +1,3 @@
-## AlejandroEVN
-
 ### Project Network 
 
 This is a network app. It works very much like Twitter.
