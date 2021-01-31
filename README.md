@@ -6,7 +6,8 @@ This is a network app. It works very much like Twitter.
 
 Add, edit and like posts. Add/remove other users to your following list.
 
-Likes and following list are updated through AJAX calls.
+The main objective of this project was to understand how to use AJAX and JavaScript to manage data from the backend,  
+updating the page without reloading (e.g. when liking a post) and working with pagination.
 
 #### Demo
 <img src="./network/demo/network-demo1.gif" width="960" height="540" />
