@@ -1,6 +1,6 @@
 ### Project Network 
 
-This is a network app. It works very much like Twitter.
+This is a social network twitter-like app.
 
 Add, edit and like posts. Add/remove other users to your following list.
 
